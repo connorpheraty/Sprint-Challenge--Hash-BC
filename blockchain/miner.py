@@ -24,9 +24,11 @@ def proof_of_work(last_proof):
     start = timer()
 
     print("Searching for next proof")
+    #block_string = json.dumps(last_proof, sort_keys=True)
     proof = 0
     #  TODO: Your code here
-
+    while valid_proof(last_proof, proof) is False:
+        proof +=1
     print("Proof found: " + str(proof) + " in " + str(timer() - start))
     return proof
 
@@ -39,8 +41,10 @@ def valid_proof(last_hash, proof):
     IE:  last_hash: ...AE9123456, new hash 123456888...
     """
 
-    # TODO: Your code here!
-    pass
+    if str(last_hash)[-6:] == str(proof)[:6]:
+        return True
+    else:
+        return False
 
 
 if __name__ == '__main__':
